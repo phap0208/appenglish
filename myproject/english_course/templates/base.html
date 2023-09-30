@@ -1,0 +1,35 @@
+<!--&lt;!&ndash; Trong template base.html &ndash;&gt;-->
+<!--<ul>-->
+<!--    <li><a href="{% url 'course_list' %}">Home</a></li>-->
+<!--    <li><a href="{% url 'login' %}">Login</a></li>-->
+<!--    <li><a href="{% url 'register' %}">Register</a></li>-->
+<!--</ul>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ</title>
+</head>
+<body>
+    <ul>
+        <li><a href="{% url 'course_list' %}">Home</a></li>
+        {% if user.is_authenticated %}
+            <li> <p>Welcome, {{ user.username }}!</p></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
+        {% endif %}
+    </ul>
+
+    <h1>Welcome to English Course</h1>
+    <h2>Courses</h2>
+    <ul>
+        {% for course in courses %}
+            <li><a href="{% url 'lesson_detail' course.id %}">{{ course.title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
